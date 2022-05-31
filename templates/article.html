@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        .main_body {
+            width: 500px;
+            margin: auto;
+        }
+
+        .sub_box {
+            width: 100%;
+            margin: 20px;
+            padding: 20px;
+
+            border: 1px solid gray;
+        }
+    </style>
+
+    <title>Title</title>
+</head>
+<body>
+<div class="main_body">
+    <form  method="post" action="/article/">
+        {% csrf_token %}
+        <select id="category" name="category">
+            {% for category in categorys %}
+                <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+            {% endfor %}
+        </select>
+        <div style="float: right">
+            <button type="submit" class="btn btn-primary">제출</button>
+        </div>
+    </form>
+    {% for article in articles %}
+        <div class="sub_box">
+            <div name="title">{{ article.category.category_name }}</div>
+            <br>
+            <div name="title">{{ article.title }}</div>
+            <br>
+            <div name="content">{{ article.content }}</div>
+        </div>
+    {% endfor %}
+
+</div>
+</body>
+</html>
